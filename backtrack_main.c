@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   backtrack_main.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: marcus <marcus@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:16:45 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/13 07:05:45 by hleung           ###   ########lyon.fr   */
+/*   Updated: 2023/01/14 17:01:37 by marcus           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(void)
 	printf("E's y =	%d\n", end->y);
 	printf("no of rows = %d\n", map->row);
 	printf("no of cols = %d\n", map->col);
-	printf("no of collectibles = %d\n", map->c_count);
+	printf("no of collectibles = %d\n", map->count[67]);
 	res = backtrack(map, start, end, dir);
 	printf("\n");
 	for (int i = 0; map->map[i]; i++)

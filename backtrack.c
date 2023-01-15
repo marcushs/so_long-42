@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   backtrack.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: marcus <marcus@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 13:22:50 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/13 07:00:07 by hleung           ###   ########lyon.fr   */
+/*   Updated: 2023/01/15 17:13:32 by marcus           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/so_long.h"
+#include "includes/libft.h"
+
+static void	free_nodes(t_point *s, t_point *e, t_point *c, int **d)
+{
+	free(s);
+	s = NULL;
+	free(e);
+	e = NULL;
+	free(c);
+	c = NULL;
+	free(d);
+	d = NULL;
+}
 
 static int	check_walkable(char c)
 {
@@ -54,7 +67,7 @@ static int	collect(t_map *map, t_point *cur, int **dir, int *count)
 		return (0);
 	if (map->map[cur->y][cur->x] == '1' || map->map[cur->y][cur->x] == '*')
 		return (0);
-	if (*count == map->c_count)
+	if (*count == map->c[67])
 		return (1);
 	if (check_walkable(map->map[cur->y][cur->x]))
 	{
@@ -75,22 +88,29 @@ static int	collect(t_map *map, t_point *cur, int **dir, int *count)
 	return (0);
 }
 
-int	backtrack(t_map *map, t_point *start, t_point *end, int **dir)
+int	backtrack(t_map *map)
 {
-	// t_map		*map;
-	// t_point		*start;
-	// t_point		*end;
+	t_point		*start;
+	t_point		*end;
 	t_point		*start_cpy;
-	// int			**dir;
+	int			**dir;
 	static int	count;
 
-	// map = parse_map(file_path);
-	// start = get_point(map->map, 'P');
-	// end = get_point(map->map, 'E');
-	 start_cpy = get_point(map->map, 'P');
-	// dir = create_dir_array();
+	start = get_point(map->map, 'P');
+	end = get_point(map->map, 'E');
+	start_cpy = get_point(map->map, 'P');
+	dir = create_dir_array();
 	count = 0;
 	if (collect(map, start, dir, &count))
-		return (go_to_exit(map, start_cpy, end, dir));
-	return (0);
+	{
+		if(!go_to_exit(map, start_cpy, end, dir))
+		{
+			ft_putstr(PATH_ERROR);
+			//free_nodes(map, start, end, start_cpy);
+			return (free_nodes(start, end, start_cpy, dir), 0);
+		}
+		return (free_nodes(start, end, start_cpy, dir), 1);
+	}
+	ft_putstr(PATH_ERROR);
+	return (free_nodes(start, end, start_cpy, dir), 0);
 }

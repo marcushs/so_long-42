@@ -3,20 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: marcus <marcus@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 12:12:01 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/13 12:17:18 by hleung           ###   ########lyon.fr   */
+/*   Updated: 2023/01/15 16:56:44 by marcus           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 # define BUFFER_SIZE 1
-# define ARG_ERROR "Error\nWrong number of arguments, exiting program!"
-# define SUFF_ERROR "Error\nInvalid file type!"
-# define FILE_ERROR "Error\nFile does not exist or no access right!"
-# define MAP_ERROR "Error\nInvalid map!"
+# define ARG_ERROR "Error\nWrong number of arguments, exiting program!\n"
+# define PARSE_ERROR "Error\nError occurred when parsing map, exiting program!\n"
+# define SUFF_ERROR "Error\nInvalid file type!\n"
+# define FILE_ERROR "Error\nFile does not exist or no access right!\n"
+# define MAP_ERROR "Error\nInvalid map!\n"
+# define PATH_ERROR "Error\nNo possible path!\n"
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
@@ -34,7 +36,7 @@ typedef struct	s_map
 	char	**map;
 	int		row;
 	int		col;
-	int		c_count;
+	int		*c;
 }				t_map;
 
 //gnl && gnl_utils
@@ -46,14 +48,16 @@ char	*get_next_line(int fd);
 t_map	*parse_map(char *file_path);
 int		count_line(char *file_path);
 int		count_cols(char *s);
-int		count_char(t_map *map, char c, int *arr);
+int		*count_char(char **map);
 t_point	*get_point(char	**map, char c);
 //map_error && map_error_utils
-
+int		file_type_error(char *file_path);
+int		file_exist(char *file_path);
+int		check_map_error(t_map *map);
 //backtrack && backtrack utils
 int		**allocate_2D_array(int rows, int cols);
 int		**create_dir_array();
-int		backtrack(t_map *map, t_point *start, t_point *end, int **dir);
+int		backtrack(t_map *map);
 //render
 void	launch_mlx(char *file_path);
 #endif

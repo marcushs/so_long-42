@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: marcus <marcus@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:16:24 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/13 12:24:42 by hleung           ###   ########lyon.fr   */
+/*   Updated: 2023/01/15 07:25:40 by marcus           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,30 +46,28 @@ int	count_cols(char *s)
 	return (i);
 }
 
-void	count_char(t_map *map, char c, int *arr)
+int	*count_char(char **map)
 {
-	int	i;
-	int	j;
+	int	x;
+	int	y;
 	int	*arr;
 
 	arr = (int *)malloc(sizeof(int) * 256);
 	if (!arr)
 		return (NULL);
 	ft_bzero(arr, 256);
-	i = 0;
-	while (i < map->row)
+	y = 0;
+	while (map[y])
 	{
-		j = 0;
-		while (map->map[i][j] && map->map[i][j] != '\n')
+		x = 0;
+		while (map[y][x] && map[y][x] != '\n')
 		{
-			if (map->map[i][j] == c)
-			{
-				arr[(int)c]++;
-			}
-			j++;
+			arr[(int)map[y][x]]++;
+			x++;
 		}
-		i++;
+		y++;
 	}
+	return (arr);
 }
 
 t_map	*parse_map(char *file_path)
@@ -84,18 +82,17 @@ t_map	*parse_map(char *file_path)
 	map->row = count_lines(file_path);
 	map->map = malloc(sizeof(char *) * map->row + 1);
 	if (!(map->map))
-		map->map = NULL;
+		return (free(map), map = NULL, NULL);
 	fd = open(file_path, O_RDONLY);
 	map->map[0] = get_next_line(fd);
-	i = 1;
-	while (i < map->row)
-	{
+	i = 0;
+	while (++i < map->row)
 		map->map[i] = get_next_line(fd);
-		i++;
-	}
 	map->map[i] = 0;
 	map->col = count_cols(map->map[i - 1]);
-	//map->c_count = count_char(map, 'C',);
+	map->c = count_char(map->map);
+	if (!map->c)
+		return (free(map->map), free(map), map->map = NULL, map = NULL, NULL);
 	close(fd);
 	return (map);
 }
