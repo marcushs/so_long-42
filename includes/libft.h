@@ -6,14 +6,12 @@
 /*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 14:23:25 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/13 08:06:57 by hleung           ###   ########lyon.fr   */
+/*   Updated: 2023/01/16 15:02:13 by hleung           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# include <stdlib.h>
-# include <unistd.h>
 
 typedef struct s_list
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcus <marcus@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 13:08:50 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/15 16:44:34 by marcus           ###   ########lyon.fr   */
+/*   Updated: 2023/01/16 17:23:21 by hleung           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,7 @@ static int	check_wall(t_map *map)
 			(y == 0 || y == map->row - 1 || x == 0 || x == map->col - 1))
 			{
 				ft_putstr(MAP_ERROR);
-				return (free(map->map), free(map->c), free(map), \
-				map->map = NULL, map->c = NULL, map = NULL, 0); 
+				return (0); 
 			}
 			x++;
 		}
@@ -84,8 +83,7 @@ static int	check_shape(t_map *map)
 		if (len != count_cols(map->map[i]))
 		{
 			ft_putstr(MAP_ERROR);
-			return (free(map->map), free(map->c), free(map), \
-			map->map = NULL, map->c = NULL, map = NULL, 0);
+			return (0);
 		}
 		i++;
 	}
@@ -98,16 +96,19 @@ int	check_map_error(t_map *map)
 
 	if (!check_shape(map) || !check_wall(map))
 		return (0);
-	i = -1;
-	while (++i < 256)
+	i = 0;
+	while (i < 256)
 	{
 		if (((i != 48 && i != 49 && i != 67 && i != 69 && i != 80) && \
 		map->c[i]) || (map->c[67] < 1 || map->c[69] != 1 || map->c[80] != 1))
 		{
 			ft_putstr(MAP_ERROR);
-			return (free(map->map), free(map->c), free(map), \
-			map->map = NULL, map->c = NULL, map = NULL, 0);
+			return (0);
 		}
+		i++;
 	}
 	return (1); 
 }
+
+//free(map->map), free(map->c), free(map), 
+//map->map = NULL, map->c = NULL, map = NULL,

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcus <marcus@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 12:12:01 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/15 16:56:44 by marcus           ###   ########lyon.fr   */
+/*   Updated: 2023/01/16 16:10:55 by hleung           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,17 @@ typedef struct	s_map
 	int		col;
 	int		*c;
 }				t_map;
+
+typedef struct	s_slg
+{
+	void	*mlx;
+	void	*win;
+	void	*img;
+	t_map	*map;
+	t_point	*p;
+	t_point	*e;
+}				t_slg;
+
 
 //gnl && gnl_utils
 void	*ft_calloc(size_t count, size_t size);

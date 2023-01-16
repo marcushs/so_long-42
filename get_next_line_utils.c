@@ -22,16 +22,6 @@ void	*ft_calloc(size_t count, size_t size)
 	return (mem);
 }
 
-// size_t	ft_strlen_gnl(char *s)
-// {
-// 	size_t	i;
-
-// 	i = 0;
-// 	while (s[i])
-// 		i++;
-// 	return (i);
-// }
-
 char	*ft_strjoin_gnl(char *s1, char *s2)
 {
 	char	*new_str;

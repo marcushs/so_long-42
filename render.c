@@ -6,7 +6,7 @@
 /*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 14:46:16 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/12 14:36:50 by hleung           ###   ########lyon.fr   */
+/*   Updated: 2023/01/16 16:25:39 by hleung           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char	*get_texture_path(t_map *map, int x, int y, char c)
+static char	*get_texture_path(t_map *map, int x, int y, char c)
 {
 	if (c == '1' && ((y == 0 || y == map->row - 1) || (x == 0 || x == map->col - 1)))
 		return ("assets/imgs/rock.xpm");
@@ -31,9 +31,8 @@ char	*get_texture_path(t_map *map, int x, int y, char c)
 		return ("assets/imgs/background.xpm");
 }
 
-void	render_map(void *mlx, void *window, t_map *map)
+static void	render_map(t_slg *slg)
 {
-	void	*img;
 	int		img_width;
 	int		img_height;
 	char	*relative_path = "assets/imgs/rock.xpm";
@@ -42,13 +41,13 @@ void	render_map(void *mlx, void *window, t_map *map)
 
 	x = 0;
 	y = 0;
-	while (map->map[y])
+	while (slg->map->map[y])
 	{
-		while (map->map[y][x])
+		while (slg->map->map[y][x])
 		{
-			relative_path = get_texture_path(map, x, y, map->map[y][x]);
-			img = mlx_xpm_file_to_image(mlx, relative_path, &img_width, &img_height);
-			mlx_put_image_to_window(mlx, window, img, x * 100, y * 100);
+			relative_path = get_texture_path(slg->map, x, y, slg->map->map[y][x]);
+			slg->img = mlx_xpm_file_to_image(slg->mlx, relative_path, &img_width, &img_height);
+			mlx_put_image_to_window(slg->mlx, slg->win, slg->img, x * 64, y * 64);
 			x++;
 		}
 	x = 0;
@@ -58,19 +57,17 @@ void	render_map(void *mlx, void *window, t_map *map)
 
 void	launch_mlx(char *file_path)
 {
-	void	*mlx;
-	void	*mlx_window;
-	t_map	*map;
-	int		x;
-	int		y;
+	t_slg	*slg;
 
-	mlx = mlx_init();
-	map = parse_map(file_path);
-	y = map->row * 100;
-	x = map->col * 100;
-	mlx_window = mlx_new_window(mlx, x, y, "so_long");
-	render_map(mlx, mlx_window, map);
-	mlx_loop(mlx);
+	slg = (t_slg *)malloc(sizeof(t_slg));
+	if (!slg) 
+		return ;
+	slg->map = parse_map(file_path);
+	slg->mlx = mlx_init();
+	slg->win = mlx_new_window(slg->mlx, slg->map->col * 64, slg->map->row *64, "so_long");
+	slg->img = NULL;
+	render_map(slg);
+	mlx_loop(slg->mlx);
 }
 
 // int	main(void)

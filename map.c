@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcus <marcus@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:16:24 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/15 07:25:40 by marcus           ###   ########lyon.fr   */
+/*   Updated: 2023/01/16 17:23:01 by hleung           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,11 @@ t_map	*parse_map(char *file_path)
 	int		fd;
 	int		i;
 
-	map = (t_map *)malloc(sizeof(t_map));
+	map = (t_map *)malloc(sizeof(t_map) * 1);
 	if (!map)
 		return (NULL);
 	map->row = count_lines(file_path);
-	map->map = malloc(sizeof(char *) * map->row + 1);
+	map->map = malloc(sizeof(char *) * (map->row + 1));
 	if (!(map->map))
 		return (free(map), map = NULL, NULL);
 	fd = open(file_path, O_RDONLY);
