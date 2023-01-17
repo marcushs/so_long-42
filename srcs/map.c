@@ -6,12 +6,12 @@
 /*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:16:24 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/17 07:24:08 by hleung           ###   ########lyon.fr   */
+/*   Updated: 2023/01/17 17:20:03 by hleung           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/so_long.h"
-#include "includes/libft.h"
+#include "../includes/so_long.h"
+#include "../includes/libft.h"
 
 static int	count_lines(char *file_path)
 {

@@ -6,12 +6,12 @@
 /*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 07:27:23 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/17 07:27:29 by hleung           ###   ########lyon.fr   */
+/*   Updated: 2023/01/17 17:18:07 by hleung           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/so_long.h"
-#include "includes/libft.h"
+#include "../includes/so_long.h"
+#include "../includes/libft.h"
 
 void	*ft_calloc(size_t count, size_t size)
 {

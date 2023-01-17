@@ -6,12 +6,12 @@
 /*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 13:08:50 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/17 07:18:44 by hleung           ###   ########lyon.fr   */
+/*   Updated: 2023/01/17 17:19:49 by hleung           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/so_long.h"
-#include "includes/libft.h"
+#include "../includes/so_long.h"
+#include "../includes/libft.h"
 
 int	file_type_error(char *file_path)
 {

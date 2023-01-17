@@ -6,13 +6,13 @@
 /*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 14:05:14 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/17 08:28:43 by hleung           ###   ########lyon.fr   */
+/*   Updated: 2023/01/17 17:19:11 by hleung           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/mlx.h"
-#include "includes/so_long.h"
-#include "includes/libft.h"
+#include "../includes/mlx.h"
+#include "../includes/so_long.h"
+#include "../includes/libft.h"
 
 int	main(int argc, char **argv)
 {
@@ -30,17 +30,8 @@ int	main(int argc, char **argv)
 		}
 		if (!check_map_error(map))
 			return (1);
-		for (int i = 0; map->map[i]; i++)
-			printf("%s", map->map[i]);
-		printf("\n");
-		printf("no of rows = %d\n", map->row);
-		printf("no of cols = %d\n", map->col);
-		printf("no of collectibles = %d\n", map->c[67]);
-		printf("\n");
 		if (!backtrack(map))
 			return (1);
-		for (int i = 0; map->map[i]; i++)
-			printf("%s", map->map[i]);
 		free(map);
 		launch_mlx(argv[1]);
 	}
