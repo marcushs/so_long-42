@@ -6,7 +6,7 @@
 /*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:16:24 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/16 17:23:01 by hleung           ###   ########lyon.fr   */
+/*   Updated: 2023/01/17 07:06:13 by hleung           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	*count_char(char **map)
 	arr = (int *)malloc(sizeof(int) * 256);
 	if (!arr)
 		return (NULL);
-	ft_bzero(arr, 256);
+	ft_bzero(arr, sizeof(int) * 256);
 	y = 0;
 	while (map[y])
 	{

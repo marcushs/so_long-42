@@ -6,7 +6,7 @@
 /*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 14:05:14 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/16 17:22:51 by hleung           ###   ########lyon.fr   */
+/*   Updated: 2023/01/17 07:11:17 by hleung           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	main(int argc, char **argv)
 		for (int i = 0; map->map[i]; i++)
 			printf("%s", map->map[i]);
 		free(map);
-		//launch_mlx(argv[1]);
+		launch_mlx(argv[1]);
 	}
 	else
 		ft_putstr(ARG_ERROR);
