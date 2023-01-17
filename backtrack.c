@@ -6,7 +6,7 @@
 /*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 13:22:50 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/16 17:23:08 by hleung           ###   ########lyon.fr   */
+/*   Updated: 2023/01/17 07:24:38 by hleung           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,9 @@ int	backtrack(t_map *map)
 	count = 0;
 	if (collect(map, start, dir, &count))
 	{
-		if(!go_to_exit(map, start_cpy, end, dir))
+		if (!go_to_exit(map, start_cpy, end, dir))
 		{
 			ft_putstr(PATH_ERROR);
-			//free_nodes(map, start, end, start_cpy);
 			return (free_nodes(start, end, start_cpy, dir), 0);
 		}
 		return (free_nodes(start, end, start_cpy, dir), 1);

@@ -6,14 +6,14 @@
 /*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:16:24 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/17 07:06:13 by hleung           ###   ########lyon.fr   */
+/*   Updated: 2023/01/17 07:24:08 by hleung           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/so_long.h"
 #include "includes/libft.h"
 
-int	count_lines(char *file_path)
+static int	count_lines(char *file_path)
 {
 	int		fd;
 	int		i;
@@ -46,7 +46,7 @@ int	count_cols(char *s)
 	return (i);
 }
 
-int	*count_char(char **map)
+static int	*count_char(char **map)
 {
 	int	x;
 	int	y;

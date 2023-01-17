@@ -6,7 +6,7 @@
 /*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 12:12:01 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/16 16:10:55 by hleung           ###   ########lyon.fr   */
+/*   Updated: 2023/01/17 08:43:09 by hleung           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,18 @@ int		ft_strchr_gnl(char *s, int c);
 char	*get_next_line(int fd);
 //map
 t_map	*parse_map(char *file_path);
-int		count_line(char *file_path);
 int		count_cols(char *s);
-int		*count_char(char **map);
 t_point	*get_point(char	**map, char c);
 //map_error && map_error_utils
 int		file_type_error(char *file_path);
 int		file_exist(char *file_path);
 int		check_map_error(t_map *map);
 //backtrack && backtrack utils
-int		**allocate_2D_array(int rows, int cols);
-int		**create_dir_array();
+int		**create_dir_array(void);
 int		backtrack(t_map *map);
 //render
 void	launch_mlx(char *file_path);
+int		event_listener(int keycode, t_slg *slg);
+char	*get_texture_path(t_map *map, int x, int y, char c);
+void	render_map(t_slg slg);
 #endif

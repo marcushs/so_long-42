@@ -6,18 +6,18 @@
 /*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:47:53 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/13 12:26:35 by hleung           ###   ########lyon.fr   */
+/*   Updated: 2023/01/17 07:26:40 by hleung           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/so_long.h"
 #include "includes/libft.h"
 
-int	**allocate_2D_array(int rows, int cols)
+static int	**allocate_2d_array(int rows, int cols)
 {
 	int	**array;
 	int	i;
-	
+
 	array = malloc(rows * sizeof(int *));
 	i = 0;
 	while (i < rows)
@@ -29,11 +29,11 @@ int	**allocate_2D_array(int rows, int cols)
 	return (array);
 }	
 
-int	**create_dir_array()
+int	**create_dir_array(void)
 {
 	int	**dir;
 
-	dir = allocate_2D_array(4, 2);
+	dir = allocate_2d_array(4, 2);
 	dir[0][0] = -1;
 	dir[0][1] = 0;
 	dir[1][0] = 0;
