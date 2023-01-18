@@ -6,12 +6,13 @@
 /*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 14:46:16 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/17 17:22:22 by hleung           ###   ########lyon.fr   */
+/*   Updated: 2023/01/18 13:45:45 by hleung           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/mlx.h"
 #include "../includes/so_long.h"
+#include "../includes/libft.h"
 
 char	*get_texture_path(t_slg *slg, int x, int y, char c)
 {
@@ -93,12 +94,14 @@ void	render_map(t_slg slg)
 	}
 }
 
-void	launch_mlx(char *file_path)
+t_slg	launch_mlx(char *file_path)
 {
 	t_slg	slg;
 
 	slg.mlx = mlx_init();
 	slg.map = parse_map(file_path);
+	if (!slg.map)
+		print_message_exit();
 	slg.p = get_point(slg.map->map, 'P');
 	slg.e = get_point(slg.map->map, 'E');
 	slg.win = mlx_new_window(slg.mlx, slg.map->col * 64, \
@@ -109,4 +112,5 @@ void	launch_mlx(char *file_path)
 	render_map(slg);
 	mlx_key_hook(slg.win, event_listener, &slg);
 	mlx_loop(slg.mlx);
+	return (slg);
 }

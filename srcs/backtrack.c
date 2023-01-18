@@ -6,7 +6,7 @@
 /*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 13:22:50 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/17 17:17:48 by hleung           ###   ########lyon.fr   */
+/*   Updated: 2023/01/18 11:37:45 by hleung           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,21 @@
 
 static void	free_nodes(t_point *s, t_point *e, t_point *c, int **d)
 {
+	int	i;
+
+	i = 0;
 	free(s);
 	s = NULL;
 	free(e);
 	e = NULL;
 	free(c);
 	c = NULL;
+	while (i < 4)
+	{
+		free(d[i]);
+		d[i] = NULL;
+		i++;
+	}
 	free(d);
 	d = NULL;
 }

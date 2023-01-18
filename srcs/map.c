@@ -6,7 +6,7 @@
 /*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:16:24 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/17 17:20:03 by hleung           ###   ########lyon.fr   */
+/*   Updated: 2023/01/18 14:11:41 by hleung           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	count_cols(char *s)
 	return (i);
 }
 
-static int	*count_char(char **map)
+static int	*count_char(t_map *map)
 {
 	int	x;
 	int	y;
@@ -54,15 +54,20 @@ static int	*count_char(char **map)
 
 	arr = (int *)malloc(sizeof(int) * 256);
 	if (!arr)
-		return (NULL);
+	{
+		free_2d_array(map->map);
+		free(map);
+		map = NULL;
+		print_message_exit();
+	}
 	ft_bzero(arr, sizeof(int) * 256);
 	y = 0;
-	while (map[y])
+	while (map->map[y])
 	{
 		x = 0;
-		while (map[y][x] && map[y][x] != '\n')
+		while (map->map[y][x] && map->map[y][x] != '\n')
 		{
-			arr[(int)map[y][x]]++;
+			arr[(int)map->map[y][x]]++;
 			x++;
 		}
 		y++;
@@ -70,7 +75,7 @@ static int	*count_char(char **map)
 	return (arr);
 }
 
-t_map	*parse_map(char *file_path)
+t_map	*make_map(char *file_path)
 {
 	t_map	*map;
 	int		fd;
@@ -90,38 +95,41 @@ t_map	*parse_map(char *file_path)
 		map->map[i] = get_next_line(fd);
 	map->map[i] = 0;
 	map->col = count_cols(map->map[i - 1]);
-	map->c = count_char(map->map);
+	map->c = count_char(map);
 	if (!map->c)
-		return (free(map->map), free(map), map->map = NULL, map = NULL, NULL);
+		return (free_2d_array(map->map), free(map), map = NULL, NULL);
 	close(fd);
 	return (map);
 }
 
-t_point	*get_point(char	**map, char c)
+char	**parse_map(char *file_path, int row)
 {
-	t_point	*point;
-	int		x;
-	int		y;
-
-	x = 0;
-	y = 0;
-	point = (t_point *)malloc(sizeof(t_point));
-	if (!point)
-		return (NULL);
-	while (map[y])
+	char	**map;
+	int		fd;
+	int		i;
+	
+	map = malloc(sizeof(char *) * (row + 1));
+	if (!map)
+		print_message_exit();
+	fd = open(file_path, O_RDONLY);
+	map[0] = get_next_line(fd);
+	if (!map[0])
+		print_message_exit();
+	i = 0;
+	while (++i < row)
 	{
-		while (map[y][x] != 0 && map[y][x] != '\n')
+		map[i] = get_next_line(fd);
+		if (!map[i])
 		{
-			if (map[y][x] == c)
+			while (--i >= 0)
 			{
-				point->x = x;
-				point->y = y;
-				return (point);
+				free(map[i]);
+				map[i] = NULL;
+				print_message_exit();
 			}
-			x++;
-		}
-		x = 0;
-		y++;
+		}	
 	}
-	return (NULL);
+	map[i] = 0;
+	close(fd);
+	return (map);
 }

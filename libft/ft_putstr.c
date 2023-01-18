@@ -5,14 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/13 08:07:11 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/13 08:08:58 by hleung           ###   ########lyon.fr   */
+/*   Created: 2023/01/18 11:56:10 by hleung            #+#    #+#             */
+/*   Updated: 2023/01/18 12:02:09 by hleung           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr(char *s)
+void ft_putstr(char *str)
 {
-	write(1, s, ft_strlen(s));
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		write(1, &str[i], 1);
+		i++;
+	}
 }
