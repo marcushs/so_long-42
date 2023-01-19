@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   backtrack_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: marcus <marcus@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:47:53 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/18 14:07:36 by hleung           ###   ########lyon.fr   */
+/*   Updated: 2023/01/19 19:42:47 by marcus           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,27 +26,29 @@ static int	**allocate_2d_array(int rows, int cols)
 	{
 		array[i] = malloc(cols * sizeof(int));
 		if (!array[i])
-		{
-			i--;
-			while (i >= 0)
-			{
-				free(array[i]);
-				array[i] = NULL;
-				i--;
-			}
-		}
+			free_prev_arr((void **)&array, i, MALLOC_ERROR);
 		ft_bzero(array[i], cols);
 		i++;
 	}
 	return (array);
 }	
 
+static t_point *create_point(int x, int y)
+{
+	t_point	*point;
+
+	point = (t_point *)malloc(sizeof(t_point));
+	if (!point)
+		return (NULL);
+	point->x = x;
+	point->y = y;
+	return (point);
+}
+
 int	**create_dir_array(void)
 {
 	int	**dir;
-	int	i;
 
-	i = 0;
 	dir = allocate_2d_array(4, 2);
 	if (!dir)
 	{
@@ -64,27 +66,19 @@ int	**create_dir_array(void)
 	return (dir);
 }
 
-t_point	*get_point(char	**map, char c)
+t_point	*get_point(t_map *map, char c)
 {
-	t_point	*point;
 	int		x;
 	int		y;
 
 	x = 0;
 	y = 0;
-	point = (t_point *)malloc(sizeof(t_point));
-	if (!point)
-		print_message_exit();
-	while (map[y])
+	while (map->map[y])
 	{
-		while (map[y][x] != 0 && map[y][x] != '\n')
+		while (map->map[y][x] != 0 && map->map[y][x] != '\n')
 		{
-			if (map[y][x] == c)
-			{
-				point->x = x;
-				point->y = y;
-				return (point);
-			}
+			if (map->map[y][x] == c)
+				return (create_point(x, y));
 			x++;
 		}
 		x = 0;

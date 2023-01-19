@@ -3,35 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   backtrack.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: marcus <marcus@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 13:22:50 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/18 11:37:45 by hleung           ###   ########lyon.fr   */
+/*   Updated: 2023/01/19 19:29:47 by marcus           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 #include "../includes/libft.h"
 
-static void	free_nodes(t_point *s, t_point *e, t_point *c, int **d)
+static void	free_nodes(t_point **s, t_point **e, t_point **c, int ***d)
 {
 	int	i;
 
 	i = 0;
-	free(s);
-	s = NULL;
-	free(e);
-	e = NULL;
-	free(c);
-	c = NULL;
+	free(*s);
+	*s = NULL;
+	free(*e);
+	*e = NULL;
+	free(*c);
+	*c = NULL;
 	while (i < 4)
 	{
-		free(d[i]);
-		d[i] = NULL;
+		free((*d)[i]);
+		(*d)[i] = NULL;
 		i++;
 	}
-	free(d);
-	d = NULL;
+	free(*d);
+	*d = NULL;
 }
 
 static int	check_walkable(char c)
@@ -99,26 +99,28 @@ static int	collect(t_map *map, t_point *cur, int **dir, int *count)
 
 int	backtrack(t_map *map)
 {
+	int			**dir;
+	static int	count;
 	t_point		*start;
 	t_point		*end;
 	t_point		*start_cpy;
-	int			**dir;
-	static int	count;
 
-	start = get_point(map->map, 'P');
-	end = get_point(map->map, 'E');
-	start_cpy = get_point(map->map, 'P');
 	dir = create_dir_array();
 	count = 0;
+	start = get_point(map, 'P');
+	end = get_point(map, 'E');
+	start_cpy = get_point(map, 'P');
+	if (!start || !end || !start_cpy)
+		return (free_nodes(&start, &end, &start_cpy, &dir), 0);
 	if (collect(map, start, dir, &count))
 	{
 		if (!go_to_exit(map, start_cpy, end, dir))
 		{
 			ft_putstr(PATH_ERROR);
-			return (free_nodes(start, end, start_cpy, dir), 0);
+			return (free_nodes(&start, &end, &start_cpy, &dir), 0);
 		}
-		return (free_nodes(start, end, start_cpy, dir), 1);
+		return (free_nodes(&start, &end, &start_cpy, &dir), 1);
 	}
 	ft_putstr(PATH_ERROR);
-	return (free_nodes(start, end, start_cpy, dir), 0);
+	return (free_nodes(&start, &end, &start_cpy, &dir), 0);
 }

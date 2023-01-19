@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: marcus <marcus@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 14:46:16 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/18 13:45:45 by hleung           ###   ########lyon.fr   */
+/*   Updated: 2023/01/19 19:38:23 by marcus           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,6 @@ void	render_other(t_slg slg, char c)
 		rp = "assets/imgs/samurai.xpm";
 	if (c == '0')
 		rp = "assets/imgs/background.xpm";
-	if (c == 'E')
-	{
-		rp = "assets/imgs/temple.xpm";
-		slg.img = mlx_xpm_file_to_image(slg.mlx, rp, &img_w, &img_h);
-		mlx_put_image_to_window(slg.mlx, slg.win, slg.img, \
-		slg.e->x * 64, slg.e->y * 64);
-		return ;
-	}
 	slg.img = mlx_xpm_file_to_image(slg.mlx, rp, &img_w, &img_h);
 	mlx_put_image_to_window(slg.mlx, slg.win, slg.img, \
 	slg.p->x * 64, slg.p->y * 64);
@@ -99,11 +91,18 @@ t_slg	launch_mlx(char *file_path)
 	t_slg	slg;
 
 	slg.mlx = mlx_init();
-	slg.map = parse_map(file_path);
-	if (!slg.map)
-		print_message_exit();
-	slg.p = get_point(slg.map->map, 'P');
-	slg.e = get_point(slg.map->map, 'E');
+	slg.map = make_map(file_path);
+	slg.p = get_point(slg.map, 'P');
+	slg.e = get_point(slg.map, 'E');
+	if (!slg.p || !slg.e)
+	{
+		free_map(&slg.map);
+		free(slg.p);
+		slg.p = NULL;
+		free(slg.e);
+		slg.e = NULL;
+		print_message_exit(PARSE_ERROR);
+	}
 	slg.win = mlx_new_window(slg.mlx, slg.map->col * 64, \
 	slg.map->row * 64, "so_long");
 	slg.img = NULL;

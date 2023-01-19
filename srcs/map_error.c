@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: marcus <marcus@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 13:08:50 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/18 11:01:35 by hleung           ###   ########lyon.fr   */
+/*   Updated: 2023/01/19 17:29:30 by marcus           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ int	file_type_error(char *file_path)
 		ft_putstr(SUFF_ERROR);
 		return (1);
 	}
-	free(substr);
-	return (0);
+	return (free(substr), substr = NULL, 0);
 }
 
 int	file_exist(char *file_path)
@@ -61,7 +60,7 @@ static int	check_wall(t_map *map)
 			(y == 0 || y == map->row - 1 || x == 0 || x == map->col - 1))
 			{
 				ft_putstr(MAP_ERROR);
-				return (free_map(map), 0);
+				return (free_map(&map), 0);
 			}
 			x++;
 		}
@@ -84,7 +83,7 @@ static int	check_shape(t_map *map)
 		if (len != count_cols(map->map[i]))
 		{
 			ft_putstr(MAP_ERROR);
-			return (free_map(map), 0);
+			return (free_map(&map), 0);
 		}
 		i++;
 	}
@@ -104,7 +103,7 @@ int	check_map_error(t_map *map)
 		map->c[i]) || (map->c[67] < 1 || map->c[69] != 1 || map->c[80] != 1))
 		{
 			ft_putstr(MAP_ERROR);
-			return (free_map(map), 0);
+			return (free_map(&map), 0);
 		}
 		i++;
 	}

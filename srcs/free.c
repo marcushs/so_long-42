@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: marcus <marcus@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 12:58:51 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/18 14:12:34 by hleung           ###   ########lyon.fr   */
+/*   Updated: 2023/01/19 16:58:19 by marcus           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,52 @@
 #include "../includes/so_long.h"
 #include "../includes/libft.h"
 
-void	print_message_exit(void)
+void	print_message_exit(char *err)
 {
-	ft_putstr(MALLOC_ERROR);
+	ft_putstr(err);
 	exit(0);
 }
 
-void	free()
-
-void	free_2d_array(char	**arr)
+void	free_prev_arr(void **arr, int i, char *err)
 {
-	int	i;
-
-	i = 0;
-	while (arr[i])
+	i--;
+	while (i >= 0)
 	{
-		free(arr[i]);
-		arr[i] = NULL;
-		i++;
+		free(((void **)*arr)[i]);
+		((void **)*arr)[i] = NULL;
+		i--;
 	}
-	free(arr);
-	arr = NULL;
+	free(*arr);
+	*arr = NULL;
+	print_message_exit(err);
 }
 
-void	free_map(t_map *map)
+void	free_2d_array(void **arr, int row)
 {
-	free_2d_array(map->map);
-	free(map->c);
-	map->c = NULL;
-	free(map);
-	map = NULL;
+	while (--row >= 0)
+	{
+		free(((void **)*arr)[row]);
+		((void **)*arr)[row] = NULL;
+	}
+	free(*arr);
+	*arr = NULL;
 }
 
-void	free_everyting(t_slg slg)
+void	free_map(t_map **map)
 {
-	free_map(slg.map);
-	free(slg.p);
-	slg.p = NULL;
-	free(slg.e);
-	slg.e = NULL;
+	free_2d_array((void **)&(*map)->map, (*map)->row);
+	free((*map)->c);
+	(*map)->c = NULL;
+	free(*map);
+	*map = NULL;
 }
+
+void	free_everyting(t_slg *slg)
+{
+	free_map(&slg->map);
+	free(slg->p);
+	slg->p = NULL;
+	free(slg->e);
+	slg->e = NULL;
+}
+

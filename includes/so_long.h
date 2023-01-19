@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: marcus <marcus@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 12:12:01 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/18 13:58:27 by hleung           ###   ########lyon.fr   */
+/*   Updated: 2023/01/19 17:27:12 by marcus           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,9 @@ char	*ft_strjoin_gnl(char *s1, char *s2);
 int		ft_strchr_gnl(char *s, int c);
 char	*get_next_line(int fd);
 //map
-char	**parse_map(char *file_path);
 t_map	*make_map(char *file_path);
 int		count_cols(char *s);
-t_point	*get_point(char	**map, char c);
+t_point	*get_point(t_map *map, char c);
 //map_error && map_error_utils
 int		file_type_error(char *file_path);
 int		file_exist(char *file_path);
@@ -86,9 +85,10 @@ void	move_left(t_slg *slg);
 //ft_printf
 int	ft_printf(const char *arg, ...);
 //free
-void	free_map(t_map *map);
-void	free_2d_array(char	**arr);
-void	free_everyting(t_slg slg);
+void	free_map(t_map **map);
+void	free_prev_arr(void **arr, int i, char *err);
+void	free_2d_array(void	**arr, int row);
+void	free_everyting(t_slg *slg);
 //exit
-void	print_message_exit(void);
+void	print_message_exit(char *err);
 #endif
