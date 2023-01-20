@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   backtrack_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcus <marcus@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 12:47:53 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/19 19:42:47 by marcus           ###   ########lyon.fr   */
+/*   Updated: 2023/01/20 10:01:59 by hleung           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	**allocate_2d_array(int rows, int cols)
 	return (array);
 }	
 
-static t_point *create_point(int x, int y)
+static t_point	*create_point(int x, int y)
 {
 	t_point	*point;
 

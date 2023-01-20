@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcus <marcus@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 12:58:51 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/19 16:58:19 by marcus           ###   ########lyon.fr   */
+/*   Updated: 2023/01/20 10:01:00 by hleung           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,3 @@ void	free_everyting(t_slg *slg)
 	free(slg->e);
 	slg->e = NULL;
 }
-

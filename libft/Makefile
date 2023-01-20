@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marcus <marcus@student.42lyon.fr>          +#+  +:+       +#+         #
+#    By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 13:20:40 by hleung            #+#    #+#              #
-#    Updated: 2023/01/19 17:01:38 by marcus           ###   ########lyon.fr    #
+#    Updated: 2023/01/20 10:34:25 by hleung           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ BOBJS	=	${BONUS:.c=.o}
 
 OBJS	=	${SRCS:.c=.o}
 
-HEADER	=	.
+HEADER	=	libft.h
 
 %.o:		%.c $(HEADER) Makefile
 			${CC} -c $< -o ${<:.c=.o} -I ${HEADER}

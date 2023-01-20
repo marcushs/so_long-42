@@ -6,9 +6,17 @@
 #    By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/16 14:00:57 by hleung            #+#    #+#              #
-#    Updated: 2023/01/18 13:08:09 by hleung           ###   ########lyon.fr    #
+#    Updated: 2023/01/20 16:13:58 by hleung           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
+
+RED = \033[0;31m
+GREEN = \033[0;32m
+YELLOW = \033[0;33m
+BLUE = \033[0;34m
+MAGENTA = \033[0;35m
+CYAN = \033[0;36m
+NC = \033[0m
 
 NAME			=	so_long
 
@@ -18,36 +26,61 @@ PFFLAGS			=	-L ft_printf -lftprintf
 
 LIBFTFLAGS		=	-L libft -lft
 
+LIBS_FILES		=	$(shell find libft ft_printf mlx -type f)
+
+HEADER_FILES	=	$(shell find includes -type f)
+
 CFLAGS			=	-Wall -Werror -Wextra
 
 CC				=	gcc
 
 RM				=	rm -rf
 
-SRCS			=	srcs/backtrack_utils.c srcs/backtrack.c srcs/events.c srcs/free.c srcs/get_next_line_utils.c \
-					srcs/get_next_line.c srcs/map_error.c srcs/map.c srcs/move.c srcs/render.c srcs/so_long.c
-					
-OBJS			=	${SRCS:.c=.o}
+LIST_SRCS		=	backtrack_utils.c backtrack.c events.c free.c get_next_line_utils.c \
+					get_next_line.c map_error.c map.c move.c render.c so_long.c
+DIR_SRCS		=	./srcs/
+SRCS			=	$(addprefix ${DIR_SRCS}, ${LIST_SRCS})
+
+LIST_OBJS		=	${LIST_SRCS:.c=.o}
+DIR_OBJS		=	.objs/
+OBJS			=	${addprefix ${DIR_OBJS}, ${LIST_OBJS}}
+
+SRCS_COMPILED	= 0
 
 HEADERS			=	includes
 
-%.o:		%.c Makefile ./mlx/*.c ./libft/*.c ./ft_printf/*.c
-			${CC} ${CFLAGS} -c $< -o ${<:.c=.o} -I ${HEADERS}
+${DIR_OBJS}%.o:	${DIR_SRCS}%.c Makefile 
+				@${CC} ${CFLAGS} -c $< -o $@ -I ${HEADERS}
+			
+all:		${NAME} 
 
-all:		${NAME}
+${NAME}:	${DIR_OBJS} ${OBJS} ${HEADERS} ${LIBS_FILES} ${HEADER_FILES}
+			@${MAKE} -sC ./libft
+			@echo "${GREEN}Compiling libft...${NC}"
+			@${MAKE} -sC ./ft_printf
+			@echo "${GREEN}Compiling ft_printf...${NC}"
+			@${MAKE} -sC ./mlx
+			@echo "${GREEN}Compiling mlx...${NC}"
+			@${CC} ${CFLAGS} ${OBJS} ${LIBFTFLAGS} ${PFFLAGS} ${MLXFLAGS} -o ${NAME}	
+			@echo "${GREEN}Compilation completed!${NC}"
 
-${NAME}:	${OBJS} ${HEADERS} 
-			$(MAKE) -C ./mlx
-			$(MAKE) -C ./libft
-			$(MAKE) -C ./ft_printf
-			${CC} $(CFLAGS) $(MLXFLAGS) ${PFFLAGS} ${LIBFTFLAGS} ${OBJS} -o ${NAME}
+${DIR_OBJS}:	
+				@mkdir -p ${DIR_OBJS}
 			
 clean:		
-			${RM} ${OBJS}
-
-fclean:		clean
-			${RM} ${NAME} libft/*.o mlx/*.o ft_printf/*.o libft/libft.a mlx/libmlx.a ft_printf/libftprintf.a
-
+			@${RM} ${DIR_OBJS}
+			@${MAKE} clean -sC ./libft
+			@${MAKE} clean -sC ./ft_printf
+			@${MAKE} clean -sC ./mlx
+			@echo "${GREEN}Object files and libraries cleared!${NC}"
+			
+fclean:		
+			@${MAKE} clean
+			@${RM} ${NAME} 
+			@${MAKE} fclean -sC ./libft
+			@${MAKE} fclean -sC ./ft_printf
+			@echo "${GREEN}Executable cleared!${NC}"
+			
 re:			fclean 
 			$(MAKE) all
 

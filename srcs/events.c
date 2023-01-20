@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcus <marcus@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 10:05:02 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/19 19:43:40 by marcus           ###   ########lyon.fr   */
+/*   Updated: 2023/01/20 10:01:24 by hleung           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	event_listener(int keycode, t_slg *slg)
 	&& slg->count == slg->map->c[67]))
 	{
 		mlx_destroy_window(slg->mlx, slg->win);
-		exit(0);//(int)slg->mlx);
+		exit(0);
 	}
 	return (0);
 }

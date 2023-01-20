@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcus <marcus@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:16:24 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/19 16:37:51 by marcus           ###   ########lyon.fr   */
+/*   Updated: 2023/01/20 10:00:47 by hleung           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static char	**parse_map(char *file_path, int row)
 	char	**map;
 	int		fd;
 	int		i;
-	
+
 	map = malloc(sizeof(char *) * (row + 1));
 	if (!map)
 		print_message_exit(MALLOC_ERROR);

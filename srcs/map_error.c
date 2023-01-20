@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcus <marcus@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 13:08:50 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/19 17:29:30 by marcus           ###   ########lyon.fr   */
+/*   Updated: 2023/01/20 16:17:00 by hleung           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	file_type_error(char *file_path)
 	if (ft_strncmp(substr, ".ber", 4))
 	{
 		ft_putstr(SUFF_ERROR);
-		return (1);
+		return (free(substr), substr = NULL, 1);
 	}
 	return (free(substr), substr = NULL, 0);
 }
