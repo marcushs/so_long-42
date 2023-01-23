@@ -6,7 +6,7 @@
 /*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 14:05:14 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/20 10:00:18 by hleung           ###   ########lyon.fr   */
+/*   Updated: 2023/01/23 10:49:26 by hleung           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,7 @@ int	main(int argc, char **argv)
 			return (1);
 		map = make_map(argv[1]);
 		if (!check_map_error(map))
-		{
-			free_map(&map);
 			return (1);
-		}
 		if (!backtrack(map))
 		{
 			free_map(&map);

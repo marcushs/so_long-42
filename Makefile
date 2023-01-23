@@ -6,7 +6,7 @@
 #    By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/16 14:00:57 by hleung            #+#    #+#              #
-#    Updated: 2023/01/20 16:13:58 by hleung           ###   ########lyon.fr    #
+#    Updated: 2023/01/23 10:51:05 by hleung           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,14 +72,14 @@ clean:
 			@${MAKE} clean -sC ./libft
 			@${MAKE} clean -sC ./ft_printf
 			@${MAKE} clean -sC ./mlx
-			@echo "${GREEN}Object files and libraries cleared!${NC}"
+			@echo "${YELLOW}Object files and libraries cleared!${NC}"
 			
 fclean:		
 			@${MAKE} clean
 			@${RM} ${NAME} 
 			@${MAKE} fclean -sC ./libft
 			@${MAKE} fclean -sC ./ft_printf
-			@echo "${GREEN}Executable cleared!${NC}"
+			@echo "${YELLOW}Executable cleared!${NC}"
 			
 re:			fclean 
 			$(MAKE) all

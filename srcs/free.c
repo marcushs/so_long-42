@@ -6,7 +6,7 @@
 /*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 12:58:51 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/20 10:01:00 by hleung           ###   ########lyon.fr   */
+/*   Updated: 2023/01/23 10:45:37 by hleung           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ void	free_prev_arr(void **arr, int i, char *err)
 
 void	free_2d_array(void **arr, int row)
 {
+	int	i;
+
+	i = 0;
 	while (--row >= 0)
 	{
 		free(((void **)*arr)[row]);
