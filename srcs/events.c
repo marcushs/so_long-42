@@ -6,7 +6,7 @@
 /*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 10:05:02 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/20 10:01:24 by hleung           ###   ########lyon.fr   */
+/*   Updated: 2023/01/23 14:49:48 by hleung           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ int	event_listener(int keycode, t_slg *slg)
 		mlx_destroy_window(slg->mlx, slg->win);
 		exit(0);
 	}
+	return (0);
+}
+
+int	exit_prog(t_slg *slg)
+{
+	mlx_destroy_window(slg->mlx, slg->win);
+	exit(0);
 	return (0);
 }
 

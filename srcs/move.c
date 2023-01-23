@@ -6,7 +6,7 @@
 /*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 16:03:31 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/17 17:20:13 by hleung           ###   ########lyon.fr   */
+/*   Updated: 2023/01/23 14:30:46 by hleung           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	move_up(t_slg *slg)
 		slg->p->y--;
 		render_other(*slg, '0');
 		slg->count++;
+		slg->steps++;
+		ft_printf("Number of steps: %d\n", slg->steps);
 		if (slg->count == slg->map->c[67])
 			render_temple(*slg);
 		slg->map->map[slg->p->y][slg->p->x] = 'P';
@@ -45,6 +47,8 @@ void	move_right(t_slg *slg)
 		slg->p->x++;
 		render_other(*slg, '0');
 		slg->count++;
+		slg->steps++;
+		ft_printf("Number of steps: %d\n", slg->steps);
 		if (slg->count == slg->map->c[67])
 			render_temple(*slg);
 		slg->map->map[slg->p->y][slg->p->x] = 'P';
@@ -67,6 +71,8 @@ void	move_down(t_slg *slg)
 		slg->p->y++;
 		render_other(*slg, '0');
 		slg->count++;
+		slg->steps++;
+		ft_printf("Number of steps: %d\n", slg->steps);
 		if (slg->count == slg->map->c[67])
 			render_temple(*slg);
 		slg->map->map[slg->p->y][slg->p->x] = 'P';
@@ -89,6 +95,8 @@ void	move_left(t_slg *slg)
 		slg->p->x--;
 		render_other(*slg, '0');
 		slg->count++;
+		slg->steps++;
+		ft_printf("Number of steps: %d\n", slg->steps);
 		if (slg->count == slg->map->c[67])
 			render_temple(*slg);
 		slg->map->map[slg->p->y][slg->p->x] = 'P';

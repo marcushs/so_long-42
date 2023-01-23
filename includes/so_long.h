@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcus <marcus@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 12:12:01 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/19 17:27:12 by marcus           ###   ########lyon.fr   */
+/*   Updated: 2023/01/23 14:50:21 by hleung           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,5 @@ void	free_2d_array(void	**arr, int row);
 void	free_everyting(t_slg *slg);
 //exit
 void	print_message_exit(char *err);
+int		exit_prog(t_slg *slg);
 #endif

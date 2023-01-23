@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcus <marcus@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: hleung <hleung@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 14:46:16 by hleung            #+#    #+#             */
-/*   Updated: 2023/01/19 19:38:23 by marcus           ###   ########lyon.fr   */
+/*   Updated: 2023/01/23 14:46:48 by hleung           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ t_slg	launch_mlx(char *file_path)
 	slg.steps = 0;
 	render_map(slg);
 	mlx_key_hook(slg.win, event_listener, &slg);
+	mlx_hook(slg.win, 17, 0, exit_prog, &slg);
 	mlx_loop(slg.mlx);
 	return (slg);
 }
